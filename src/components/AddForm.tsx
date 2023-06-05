@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState, KeyboardEvent } from "react";
 import { v4 as uuidv4 } from "uuid";
 uuidv4();
 
@@ -9,6 +9,13 @@ export const AddForm = ({ submit, todoList, isUnique }: any) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputText(e.target.value);
     setUnique(isUnique(e.target.value, todoList));
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Escape") {
+      e.currentTarget?.blur();
+      setInputText("");
+    }
   };
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,6 +39,7 @@ export const AddForm = ({ submit, todoList, isUnique }: any) => {
         value={inputText}
         placeholder="What should we do today?"
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
       <button className="todo-submit" type="submit">
         Add Task

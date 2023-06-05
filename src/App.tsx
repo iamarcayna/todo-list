@@ -48,7 +48,7 @@ function App() {
   };
 
   const addTodo = (todo: Todo) => {
-    setTodoList([...todoList, todo]);
+    setTodoList([todo, ...todoList]);
   };
 
   const toggleCompleted = (todo: Todo, list: Array<Todo>) => {
@@ -72,24 +72,43 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="title">Things to be done!</h1>
-      <AddForm submit={addTodo} todoList={todoList} isUnique={isUnique} />
-      {todoList.length > 0 && (
-        <TodoTable
-          todoList={todoList}
-          onDelete={handleDeleteClicked}
-          onComplete={handleCompleteClicked}
-          onEdit={handleEditClicked}
-          isUnique={isUnique}
-        />
-      )}
-      {completedTodoList.length > 0 && (
-        <CompletedTable
-          completedTodoList={completedTodoList}
-          onDelete={handleDeleteClicked}
-          onComplete={handleCompleteClicked}
-        />
-      )}
+      <header className="nav">
+        <div className="form-container">
+          <AddForm submit={addTodo} todoList={todoList} isUnique={isUnique} />
+        </div>
+      </header>
+      <main>
+        <div className="todo-container">
+          <div className="tables">
+            <div className="table">
+              <p className="all-task ">Things to be done!</p>
+              {todoList.length === 0 ? (
+                <p className="no-task">You're all set. No more task to do.😊</p>
+              ) : (
+                <TodoTable
+                  todoList={todoList}
+                  onDelete={handleDeleteClicked}
+                  onComplete={handleCompleteClicked}
+                  onEdit={handleEditClicked}
+                  isUnique={isUnique}
+                />
+              )}
+            </div>
+            <div className="table">
+              <p className="all-task">Completed</p>
+              {completedTodoList.length === 0 ? (
+                <p className="no-task">No task completed.😢</p>
+              ) : (
+                <CompletedTable
+                  completedTodoList={completedTodoList}
+                  onDelete={handleDeleteClicked}
+                  onComplete={handleCompleteClicked}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }

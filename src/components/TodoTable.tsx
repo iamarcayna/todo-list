@@ -13,7 +13,7 @@ export const TodoTable = ({
     <ul className="todo-table">
       {todoList.map((todo: Todo, index: number) => {
         return (
-          <div key={index}>
+          <li key={index}>
             {!todo.isEditing ? (
               <TodoItem
                 todo={todo}
@@ -29,7 +29,7 @@ export const TodoTable = ({
                 todoList={todoList}
               />
             )}
-          </div>
+          </li>
         );
       })}
     </ul>

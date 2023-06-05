@@ -7,21 +7,18 @@ export const CompletedTable = ({
   onComplete,
 }: any) => {
   return (
-    <div>
-      <hr />
-      <p className="completed-label">Completed</p>
-      <ul className="todo-table">
-        {completedTodoList.map((todo: Todo, index: number) => {
-          return (
+    <ul className="todo-table">
+      {completedTodoList.map((todo: Todo, index: number) => {
+        return (
+          <li key={index}>
             <TodoItem
               todo={todo}
-              key={index}
               onDelete={() => onDelete(todo, completedTodoList)}
               onComplete={() => onComplete(todo, completedTodoList)}
             />
-          );
-        })}
-      </ul>
-    </div>
+          </li>
+        );
+      })}
+    </ul>
   );
 };
